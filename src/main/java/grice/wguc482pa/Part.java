@@ -1,10 +1,11 @@
+package grice.wguc482pa;
 /**
 * Supplied class Part.java 
  */
 
 /**
  *
- * @author Place Your Name Here
+ * @author William Grice
  */
 public abstract class Part {
     private int id;
@@ -25,10 +26,15 @@ public abstract class Part {
     /**
      * @return the id
      */
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
+    /**
+     * @return the String version of id
+     */
+    public String getIdString() {
+        String s = "";
+        return s.valueOf(id);
+    }
     /**
      * @param id the id to set
      */

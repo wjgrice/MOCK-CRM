@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="addProductAnchor" prefHeight="771.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grice.AddProductController">
+<AnchorPane fx:id="addProductAnchor" prefHeight="771.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grice.wguc482pa.AddProductController">
    <children>
       <Label layoutX="29.0" layoutY="28.0" prefHeight="82.0" prefWidth="253.0" text="Add Product">
          <font>
