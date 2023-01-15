@@ -30,4 +30,7 @@ public class ModifyPartController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void modPartSave(ActionEvent actionEvent) {
+    }
 }

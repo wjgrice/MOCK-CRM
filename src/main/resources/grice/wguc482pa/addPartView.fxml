@@ -73,14 +73,14 @@
             <Font size="18.0" />
          </font>
       </TextField>
-      <RadioButton fx:id="addPartInHouse" layoutX="249.0" layoutY="60.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" selected="true" text="In-House">
+      <RadioButton fx:id="addPartInHouse" layoutX="249.0" layoutY="60.0" mnemonicParsing="false" onAction="#addPartSave" prefHeight="39.0" prefWidth="125.0" selected="true" text="In-House">
          <font>
             <Font size="18.0" />
          </font>
          <toggleGroup>
             <ToggleGroup fx:id="addPartTG" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="addPartOutsource" layoutX="381.0" layoutY="60.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" text="Outsourced" toggleGroup="$addPartTG">
+      <RadioButton fx:id="addPartOutsource" layoutX="381.0" layoutY="60.0" mnemonicParsing="false" onAction="#addPartSave" prefHeight="39.0" prefWidth="125.0" text="Outsourced" toggleGroup="$addPartTG">
          <font>
             <Font size="18.0" />
          </font>

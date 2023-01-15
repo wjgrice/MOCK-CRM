@@ -33,7 +33,7 @@ public abstract class Part {
      */
     public String getIdString() {
         String s = "";
-        return s.valueOf(id);
+        return String.valueOf(id);
     }
     /**
      * @param id the id to set

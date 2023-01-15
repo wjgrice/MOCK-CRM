@@ -6,7 +6,7 @@
 
 <AnchorPane fx:id="modPartAnchor" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grice.wguc482pa.ModifyPartController">
     <children>
-        <Button fx:id="addPartSaveBtn" layoutX="301.0" layoutY="462.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="91.0" text="Save">
+        <Button fx:id="modPartSaveBtn" layoutX="301.0" layoutY="462.0" mnemonicParsing="false" onAction="#modPartSave" prefHeight="39.0" prefWidth="91.0" text="Save">
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -29,7 +29,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="63.0" layoutY="300.0" text="Price / Cost">
+        <Label fx:id="modPartPriceLabel" layoutX="63.0" layoutY="300.0" text="Price / Cost">
             <font>
                 <Font size="18.0" />
             </font>
@@ -44,7 +44,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="65.0" layoutY="351.0" text="Min / Max Stock">
+        <Label fx:id="modPartMinMaxLabel" layoutX="65.0" layoutY="351.0" text="Min / Max Stock">
             <font>
                 <Font size="18.0" />
             </font>
@@ -74,7 +74,7 @@
                 <Font size="18.0" />
             </font>
         </TextField>
-        <TextField fx:id="modPartSourceInput" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="396.0" prefHeight="39.0" prefWidth="273.0" promptText="Stamp Press #1">
+        <TextField fx:id="modPartSource" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="396.0" prefHeight="39.0" prefWidth="273.0" promptText="Stamp Press #1">
             <font>
                 <Font size="18.0" />
             </font>
@@ -82,8 +82,11 @@
         <RadioButton fx:id="modPartInHouse" layoutX="249.0" layoutY="60.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" selected="true" text="In-House">
             <font>
                 <Font size="18.0" />
-            </font></RadioButton>
-        <RadioButton fx:id="modPartOutsource" layoutX="381.0" layoutY="60.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" text="Outsourced">
+            </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="tg" />
+         </toggleGroup></RadioButton>
+        <RadioButton fx:id="modPartOutsource" layoutX="381.0" layoutY="60.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" text="Outsourced" toggleGroup="$tg">
             <font>
                 <Font size="18.0" />
             </font>
@@ -93,5 +96,10 @@
                 <Font size="18.0" />
             </font>
         </TextField>
+      <Label fx:id="modPartNameWarning" layoutX="63.0" layoutY="226.0" prefHeight="17.0" prefWidth="164.0" textFill="RED" />
+      <Label fx:id="modPartStockWarning" layoutX="63.0" layoutY="273.0" prefHeight="17.0" prefWidth="171.0" textFill="RED" />
+      <Label fx:id="modPartPriceWarning" layoutX="66.0" layoutY="325.0" prefHeight="17.0" prefWidth="164.0" textFill="RED" />
+      <Label fx:id="modPartMinMaxWarning" layoutX="68.0" layoutY="376.0" prefHeight="17.0" prefWidth="164.0" textFill="RED" />
+      <Label fx:id="modPartSourceWarning" layoutX="68.0" layoutY="427.0" prefHeight="17.0" prefWidth="164.0" textFill="RED" />
     </children>
 </AnchorPane>

@@ -68,7 +68,7 @@ public class Product {
      */
     public String getIdString() {
         String s = "";
-        return s.valueOf(id);
+        return String.valueOf(id);
     }
 
     /**
