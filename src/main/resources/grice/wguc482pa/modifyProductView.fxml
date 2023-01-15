@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="modProductAnchor" prefHeight="771.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grice.wguc482pa.ModifyProductController">
+    <children>
+        <Label layoutX="29.0" layoutY="28.0" prefHeight="82.0" prefWidth="279.0" text="Modify Product">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font></Label>
+        <Label layoutX="28.0" layoutY="145.0" prefHeight="27.0" prefWidth="24.0" text="ID">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="26.0" layoutY="193.0" prefHeight="27.0" prefWidth="57.0" text="Name">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="24.0" layoutY="246.0" prefHeight="27.0" prefWidth="31.0" text="Inv">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="24.0" layoutY="302.0" text="Price">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="22.0" layoutY="353.0" prefHeight="27.0" prefWidth="47.0" text="Max">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="modProductId" layoutX="113.0" layoutY="146.0" prefHeight="25.0" prefWidth="202.0">
+            <font>
+                <Font size="14.0" />
+            </font></TextField>
+        <TextField fx:id="modProductName" layoutX="113.0" layoutY="194.0" prefHeight="25.0" prefWidth="202.0">
+            <font>
+                <Font size="14.0" />
+            </font></TextField>
+        <TextField fx:id="modProductInv" layoutX="113.0" layoutY="247.0" prefHeight="25.0" prefWidth="74.0">
+            <font>
+                <Font size="14.0" />
+            </font></TextField>
+        <TextField fx:id="modProductPrice" layoutX="113.0" layoutY="303.0" prefHeight="25.0" prefWidth="74.0">
+            <font>
+                <Font size="14.0" />
+            </font></TextField>
+        <TextField fx:id="modProductMax" layoutX="113.0" layoutY="354.0" prefHeight="25.0" prefWidth="74.0">
+            <font>
+                <Font size="14.0" />
+            </font></TextField>
+        <Label layoutX="199.0" layoutY="355.0" prefHeight="30.0" prefWidth="31.0" text="Min">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <TextField fx:id="modProductMin" layoutX="239.0" layoutY="354.0" prefHeight="30.0" prefWidth="74.0">
+            <font>
+                <Font size="14.0" />
+            </font></TextField>
+        <TextField fx:id="modProductSearch" alignment="CENTER_RIGHT" layoutX="663.0" layoutY="69.0" prefHeight="25.0" prefWidth="332.0" promptText="Search by Part ID or Name">
+            <font>
+                <Font size="14.0" />
+            </font></TextField>
+        <TableView fx:id="modProductPartTbl" layoutX="545.0" layoutY="124.0" prefHeight="200.0" prefWidth="450.0">
+            <columns>
+                <TableColumn prefWidth="94.0" text="Part ID" />
+                <TableColumn prefWidth="219.0" text="Part Name" />
+                <TableColumn prefWidth="59.0" text="Inv Level" />
+                <TableColumn prefWidth="66.0" text="Unit Cost" />
+            </columns>
+        </TableView>
+        <TableView fx:id="modProductProductTbl" layoutX="545.0" layoutY="414.0" prefHeight="200.0" prefWidth="450.0">
+            <columns>
+                <TableColumn prefWidth="94.0" text="Part ID" />
+                <TableColumn prefWidth="219.0" text="Part Name" />
+                <TableColumn prefWidth="59.0" text="Inv Level" />
+                <TableColumn prefWidth="66.0" text="Unit Cost" />
+            </columns>
+        </TableView>
+        <Button fx:id="modProductAddBtn" layoutX="895.0" layoutY="343.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="98.0" text="Add">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="modProductRemovePartBtn" layoutX="791.0" layoutY="623.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="202.0" text="Remove Part">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="modProductSaveBtn" layoutX="791.0" layoutY="695.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="86.0" text="Save">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="modProductCancelBtn" layoutX="906.0" layoutY="694.0" mnemonicParsing="false" onAction="#toMain" prefHeight="39.0" prefWidth="86.0" text="Cancel">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
