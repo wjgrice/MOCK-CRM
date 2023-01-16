@@ -1,5 +1,6 @@
 package grice.wguc482pa;
 
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -18,6 +19,11 @@ public class Helper {
         fields.label.setTextFill(Color.BLACK);
         fields.warning.setText("");
         fields.setErrState(false);
+    }
+
+    public static void setWarningLabel(Label label, String msg) {
+        label.setTextFill(Color.RED);
+        label.setText(msg);
     }
     public static Pair checkInt(FieldsDAO field) {
 

@@ -86,5 +86,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Label fx:id="mainPartModWarning" layoutX="156.0" layoutY="712.0" prefHeight="17.0" prefWidth="530.0" textFill="RED" />
     </children>
 </AnchorPane>

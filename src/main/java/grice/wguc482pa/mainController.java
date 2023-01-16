@@ -70,8 +70,17 @@ public class mainController implements Initializable {
         screenChange("/grice/wguc482pa/addPartView.fxml", actionEvent);
     }
 
+    @FXML
+    private Label mainPartModWarning;
     public void modPart(ActionEvent actionEvent) throws IOException {
-        screenChange("/grice/wguc482pa/modifyPartView.fxml", actionEvent);
+        // Check for part selection.  Throw warning label if no selection present
+        if(mainPartTbl.getSelectionModel().isEmpty()) {
+            Helper.setWarningLabel(mainPartModWarning, "Select item from Part list before proceeding");
+        } else {
+            // Pass selected part to mod screen by setting static member in modPartController
+            ModifyPartController.selectedPart(mainPartTbl.getSelectionModel().getSelectedItem());
+            // Load modPartController
+            screenChange("/grice/wguc482pa/modifyPartView.fxml", actionEvent); }
     }
 
     public void addProduct(ActionEvent actionEvent) throws IOException {

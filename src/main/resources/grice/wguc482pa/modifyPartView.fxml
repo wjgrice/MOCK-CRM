@@ -14,7 +14,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-        <TextField fx:id="modPartId" alignment="CENTER_RIGHT" editable="false" layoutX="236.0" layoutY="141.0" prefHeight="39.0" prefWidth="273.0">
+        <TextField fx:id="modPartId" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="236.0" layoutY="141.0" prefHeight="39.0" prefWidth="273.0">
             <font>
                 <Font size="18.0" />
             </font>
@@ -34,7 +34,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="65.0" layoutY="201.0" text="Name">
+        <Label fx:id="modPartNameLabel" layoutX="65.0" layoutY="201.0" text="Name">
             <font>
                 <Font size="18.0" />
             </font>
@@ -49,7 +49,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="63.0" layoutY="248.0" text="Inventory">
+        <Label fx:id="modPartStockLabel" layoutX="63.0" layoutY="248.0" text="Inventory">
             <font>
                 <Font size="18.0" />
             </font>
@@ -79,7 +79,7 @@
                 <Font size="18.0" />
             </font>
         </TextField>
-        <RadioButton fx:id="modPartInHouse" layoutX="249.0" layoutY="60.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" selected="true" text="In-House">
+        <RadioButton fx:id="modPartInHouse" layoutX="249.0" layoutY="60.0" mnemonicParsing="false" onAction="#sourceSwtich" prefHeight="39.0" prefWidth="125.0" selected="true" text="In-House">
             <font>
                 <Font size="18.0" />
             </font>
