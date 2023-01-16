@@ -25,13 +25,31 @@ import java.util.*;
 public class AddPartController implements Initializable {
     @FXML
     private TextField addPartId;
+    @FXML
+    private TextField addPartName, addPartInv, addPartCost, addPartMin, addPartMax, addPartSourceInput;
+    @FXML
+    private Label addPartNameLabel, addPartNameWarning, addPartStockWarning, addPartInvLabel, addPartCostWarning,
+            addPartMinMaxWarning, addPartMinMaxLabel, addPartSourceWarning, addPartSourceLbl, addPartCostLabel;
+    @FXML
+    private RadioButton addPartInHouse;
+
+    // Setup containers for labels and text fields to make label alerts easier
+    FieldsDAO nameFields,stockFields,priceFields,minFields,maxFields,sourceFields;
 
     @Override
     /**
      * Initializes add pard id text field to next available part number
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Init ID field with temp id number
         addPartId.setText(Inventory.getTempCounter());
+        // Init label containers
+        nameFields = new FieldsDAO(addPartName, addPartNameLabel, addPartNameWarning, false);
+        stockFields = new FieldsDAO(addPartInv, addPartInvLabel, addPartStockWarning, false);
+        priceFields = new FieldsDAO(addPartCost, addPartCostLabel, addPartCostWarning, false);
+        minFields = new FieldsDAO(addPartMin, addPartMinMaxLabel, addPartMinMaxWarning, false);
+        maxFields = new FieldsDAO(addPartMax, addPartMinMaxLabel, addPartMinMaxWarning, false);
+        sourceFields = new FieldsDAO(addPartSourceInput, addPartSourceLbl, addPartSourceWarning, false);
     }
 
     /**
@@ -48,14 +66,6 @@ public class AddPartController implements Initializable {
         stage.show();
     }
 
-    @FXML
-    private TextField addPartName, addPartInv, addPartCost, addPartMin, addPartMax, addPartSourceInput;
-    @FXML
-    private Label addPartNameLabel, addPartNameWarning, addPartStockWarning, addPartInvLabel, addPartCostWarning,
-            addPartMinMaxWarning, addPartMinMaxLabel, addPartSourceWarning, addPartSourceLbl, addPartCostLabel;
-    @FXML
-    private RadioButton addPartInHouse;
-
     /**
      * This method is run once the user clicks the Save button.  All Textfields are validated providing user
      * feedback as needed.  Once validation has completed the user new part is added to the Inventory datastore.
@@ -64,13 +74,8 @@ public class AddPartController implements Initializable {
      * @param actionEvent Passed from parent method.
      * @throws IOException From FXMLLoader.
      */
-    public void addPartSave(ActionEvent actionEvent) throws IOException {
-        FieldsDAO nameFields = new FieldsDAO(addPartName, addPartNameLabel, addPartNameWarning, false);
-        FieldsDAO stockFields = new FieldsDAO(addPartInv, addPartInvLabel, addPartStockWarning, false);
-        FieldsDAO priceFields = new FieldsDAO(addPartCost, addPartCostLabel, addPartCostWarning, false);
-        FieldsDAO minFields = new FieldsDAO(addPartMin, addPartMinMaxLabel, addPartMinMaxWarning, false);
-        FieldsDAO maxFields = new FieldsDAO(addPartMax, addPartMinMaxLabel, addPartMinMaxWarning, false);
-        FieldsDAO sourceFields = new FieldsDAO(addPartSourceInput, addPartSourceLbl, addPartSourceWarning, false);
+    public boolean addPartSave(ActionEvent actionEvent) throws IOException {
+
 
         // Check all the fields for input and alert for any that are empty.
         // If not empty clear any alerts that are present
@@ -117,18 +122,30 @@ public class AddPartController implements Initializable {
             }
         }
 
-        Boolean noAlerts = !(nameFields.getErrState() || priceFields.getErrState() || stockFields.getErrState() ||
-                                minFields.getErrState() ||   maxFields.getErrState() || sourceFields.getErrState());
 
-        if (noAlerts) {
+        // Setup variables for easy part creation
+        int id = Inventory.getCounter();
+        String name = nameFields.textField.getText();
+        Double price = (Double) Helper.checkDbl(priceFields).getValue();
+        Integer stock = (Integer) Helper.checkInt(stockFields).getValue();
+        Integer min = (Integer) Helper.checkInt(minFields).getValue();
+        Integer max = (Integer) Helper.checkInt(maxFields).getValue();
 
-            // Setup variables for easy part creation
-            int id = Inventory.getCounter();
-            String name = nameFields.textField.getText();
-            Double price = (Double) Helper.checkDbl(priceFields).getValue();
-            Integer stock = (Integer) Helper.checkInt(stockFields).getValue();
-            Integer min = (Integer) Helper.checkInt(minFields).getValue();
-            Integer max = (Integer) Helper.checkInt(maxFields).getValue();
+        // All fields have any entry of the correct type.  Now check validity of min/max and stock levels.
+        if (noAlerts()){
+            if(min > max){
+                System.out.print("HEre");
+                Helper.setAlert(minFields, "MIN not less than MAX");
+                return false;
+            }
+            if(stock < min || stock > max){
+                System.out.print("HEre");
+                Helper.setAlert(stockFields, "Must be between MIN/MAX");
+                return false;
+            }
+        }
+
+        if (noAlerts()) {
             // Check if InHouse or Outsourced use int or string as required for source field.
             if (addPartInHouse.selectedProperty().getValue()) {
                 Integer source = (Integer) Helper.checkInt(sourceFields).getValue();
@@ -141,8 +158,15 @@ public class AddPartController implements Initializable {
                 toMain(actionEvent);
             }
         }
-
+    return true;
     }
+
+    // Return true if there are no active alerts for the screen.
+    private boolean noAlerts(){
+        return !(nameFields.getErrState() || priceFields.getErrState() || stockFields.getErrState() ||
+                minFields.getErrState() ||   maxFields.getErrState() || sourceFields.getErrState());
+    }
+
 }
 
 
