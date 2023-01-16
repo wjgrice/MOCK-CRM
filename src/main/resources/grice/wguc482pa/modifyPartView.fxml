@@ -79,14 +79,14 @@
                 <Font size="18.0" />
             </font>
         </TextField>
-        <RadioButton fx:id="modPartInHouse" layoutX="249.0" layoutY="60.0" mnemonicParsing="false" onAction="#sourceSwtich" prefHeight="39.0" prefWidth="125.0" selected="true" text="In-House">
+        <RadioButton fx:id="modPartInHouse" layoutX="249.0" layoutY="60.0" mnemonicParsing="false" onAction="#sourceSwitch" prefHeight="39.0" prefWidth="125.0" selected="true" text="In-House">
             <font>
                 <Font size="18.0" />
             </font>
          <toggleGroup>
             <ToggleGroup fx:id="tg" />
          </toggleGroup></RadioButton>
-        <RadioButton fx:id="modPartOutsource" layoutX="381.0" layoutY="60.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" text="Outsourced" toggleGroup="$tg">
+        <RadioButton fx:id="modPartOutsource" layoutX="381.0" layoutY="60.0" mnemonicParsing="false" onAction="#sourceSwitch" prefHeight="39.0" prefWidth="125.0" text="Outsourced" toggleGroup="$tg">
             <font>
                 <Font size="18.0" />
             </font>

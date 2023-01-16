@@ -9,11 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class mainController implements Initializable {
@@ -91,7 +91,7 @@ public class mainController implements Initializable {
         screenChange("/grice/wguc482pa/modifyProductView.fxml", actionEvent);
     }
     public void screenChange(String path, ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(path));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -105,7 +105,7 @@ public class mainController implements Initializable {
     FilteredList<Part> namePartFilter = new FilteredList<>(Inventory.getAllParts(), p -> true); // list for name filtering
     FilteredList<Part> idPartFilter = new FilteredList<>(Inventory.getAllParts(), p -> true); // list for id filtering
     @FXML
-    public void mainPartsSearchKeyStroke() throws IOException {
+    public void mainPartsSearchKeyStroke() {
         String filter = mainPartSearch.getText(); // Initialize filter by getting text from search box
         mainPartSearchStatusLabel.setText(""); // Initialize Status label by setting to empty string.
         mainPartTbl.getSelectionModel().clearSelection(); // Initialize tableview Selection by clearing it
@@ -145,7 +145,7 @@ public class mainController implements Initializable {
     FilteredList<Product> nameProductFilter = new FilteredList<>(Inventory.getAllProducts(), p -> true); //obslist for name filtering
     FilteredList<Product> idProductFilter = new FilteredList<>(Inventory.getAllProducts(), p -> true); // obslist for id filtering
     @FXML
-    public void mainProductSearchKeystroke() throws IOException {
+    public void mainProductSearchKeystroke(){
         String filter = mainProductSearch.getText(); // Initialize filter by getting text from search box
         mainProductSearchStatusLabel.setText(""); // Initialize Status label by setting to empty string.
         mainProductTbl.getSelectionModel().clearSelection(); // Initialize tableview Selection by clearing it
@@ -178,8 +178,27 @@ public class mainController implements Initializable {
         }
     }
 
-    public void appExit(ActionEvent actionEvent) throws IOException {
+    public void appExit(){
         System.exit(0);
     }
 
+    public void mainPartDel() {
+        // Check for part selection.  Throw warning label if no selection present
+        if(mainPartTbl.getSelectionModel().isEmpty()) {
+            Helper.setWarningLabel(mainPartModWarning, "Select item from Part list before proceeding");
+        } else {
+            // Pass selected part to mod screen by setting static member in modPartController
+            Inventory.deletePart(mainPartTbl.getSelectionModel().getSelectedItem());
+            }
+    }
+    @FXML private Label mainProductWarning;
+    public void mainProductDel() {
+        // Check for part selection.  Throw warning label if no selection present
+        if(mainProductTbl.getSelectionModel().isEmpty()) {
+            Helper.setWarningLabel(mainProductWarning, "Select item from Part list before proceeding");
+        } else {
+            // Pass selected part to mod screen by setting static member in modPartController
+            Inventory.deleteProduct(mainProductTbl.getSelectionModel().getSelectedItem());
+        }
+    }
 }

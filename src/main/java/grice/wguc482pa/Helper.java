@@ -1,11 +1,14 @@
 package grice.wguc482pa;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.util.Pair;
+
+import java.util.ArrayList;
 
 public class Helper {
     public static void setAlert(FieldsDAO fields, String msg){
@@ -49,5 +52,54 @@ public class Helper {
             return p;
         }
     }
+
+    public static boolean noAlerts(FieldsDAO[] allFields, RadioButton inHouseButton){
+        for (FieldsDAO field : allFields) {
+            if (field.textField.getText().trim().equals("")) {
+                Helper.setAlert(field, "Missing Input");
+            } else {
+                Helper.clearAlert(field);
+            }
+        }
+
+        // Check validity of integer entries. INT validations are variable due to nature of source field.
+        // Setup Arraylist which can be expanded as needed.
+        ArrayList<FieldsDAO> intFields = new ArrayList<>();
+        intFields.add(allFields[1]);
+        intFields.add(allFields[2]);
+        intFields.add(allFields[3]);
+        intFields.add(allFields[4]);
+        // Check if In-House radio button is selected.  Add partSource to inFields for Int validation if so.
+        if (inHouseButton.selectedProperty().getValue()) {
+            intFields.add(allFields[5]);
+        }
+
+        for (FieldsDAO field : intFields) {
+            Pair p = Helper.checkInt(field);
+            if (p.getKey().equals(false)) {
+                Helper.setAlert(field, "Enter Valid Integer");
+            } else {
+                Helper.clearAlert(field);
+            }
+        }
+
+        // Check validity of double entries
+        // INIT small list with just double value field that need to be checked.
+        FieldsDAO[] doubleFields = {allFields[2]};
+        for (FieldsDAO field : doubleFields) {
+            Pair p = Helper.checkDbl(field);
+            if (p.getKey().equals(false)) {
+                Helper.setAlert(field, "Enter Valid Float");
+            } else {
+                Helper.clearAlert(field);
+            }
+        }
+
+        // Return true if there are no active alerts for the screen else return false.
+        return !(allFields[0].getErrState() || allFields[1].getErrState() || allFields[2].getErrState() ||
+                allFields[3].getErrState() ||   allFields[4].getErrState() || allFields[5].getErrState());
+
+    }
+
 }
 

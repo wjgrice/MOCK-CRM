@@ -4,101 +4,115 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="addPartAnchor" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grice.wguc482pa.AddPartController">
-   <children>
-      <Button fx:id="addPartSavebtn" layoutX="301.0" layoutY="462.0" mnemonicParsing="false" onAction="#addPartSave" prefHeight="39.0" prefWidth="91.0" text="Save" />
-      <Button fx:id="addPartCancelBtn" layoutX="421.0" layoutY="462.0" mnemonicParsing="false" onAction="#toMain" prefHeight="39.0" prefWidth="91.0" text="Cancel" />
-      <TextField fx:id="addPartId" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="236.0" layoutY="141.0" prefHeight="39.0" prefWidth="273.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <Label layoutX="73.0" layoutY="39.0" prefHeight="80.0" prefWidth="163.0" text="Add Part">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="64.0" layoutY="147.0" text="ID">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="addPartCostLabel" layoutX="63.0" layoutY="300.0" text="Price / Cost">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="addPartNameLabel" layoutX="65.0" layoutY="201.0" text="Name">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="addPartSourceLbl" layoutX="63.0" layoutY="402.0" prefHeight="27.0" prefWidth="163.0" text="Machine ID">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="addPartMinMaxLabel" layoutX="65.0" layoutY="351.0" text="Min / Max Stock">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="addPartInvLabel" layoutX="63.0" layoutY="248.0" text="Inventory">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="addPartName" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="195.0" prefHeight="39.0" prefWidth="273.0" promptText="Widget">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="addPartInv" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="242.0" prefHeight="39.0" prefWidth="273.0" promptText="Inventory Level">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="addPartCost" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="294.0" prefHeight="39.0" prefWidth="273.0" promptText="99.99">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="addPartMin" alignment="CENTER" layoutX="236.0" layoutY="345.0" prefHeight="39.0" prefWidth="130.0" promptText="MIN">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="addPartSourceInput" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="396.0" prefHeight="39.0" prefWidth="273.0" promptText="Machine Number">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <RadioButton fx:id="addPartInHouse" layoutX="249.0" layoutY="60.0" mnemonicParsing="false" onAction="#addPartSave" prefHeight="39.0" prefWidth="125.0" selected="true" text="In-House">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <toggleGroup>
-            <ToggleGroup fx:id="addPartTG" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="addPartOutsource" layoutX="381.0" layoutY="60.0" mnemonicParsing="false" onAction="#addPartSave" prefHeight="39.0" prefWidth="125.0" text="Outsourced" toggleGroup="$addPartTG">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </RadioButton>
-      <TextField fx:id="addPartMax" alignment="CENTER" layoutX="382.0" layoutY="345.0" prefHeight="39.0" prefWidth="130.0" promptText="MAX">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </TextField>
-      <Label fx:id="addPartWarningLabel" layoutX="221.0" layoutY="102.0" prefHeight="35.0" prefWidth="197.0" textAlignment="CENTER" textFill="RED">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="addPartNameWarning" layoutX="67.0" layoutY="226.0" prefHeight="17.0" prefWidth="155.0" textFill="RED" />
-      <Label fx:id="addPartStockWarning" layoutX="67.0" layoutY="271.0" prefHeight="17.0" prefWidth="163.0" textFill="RED" />
-      <Label fx:id="addPartCostWarning" layoutX="67.0" layoutY="325.0" prefHeight="17.0" prefWidth="163.0" textFill="RED" />
-      <Label fx:id="addPartMinMaxWarning" layoutX="67.0" layoutY="376.0" prefHeight="17.0" prefWidth="163.0" textFill="RED" />
-      <Label fx:id="addPartSourceWarning" layoutX="68.0" layoutY="427.0" prefHeight="17.0" prefWidth="163.0" textFill="RED" />
-   </children>
+<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="grice.wguc482pa.AddPartController">
+   <Button layoutX="301.0" layoutY="462.0" mnemonicParsing="false" onAction="#addPartSave" prefHeight="39.0"
+           prefWidth="91.0" text="Save"/>
+   <Button layoutX="421.0" layoutY="462.0" mnemonicParsing="false" onAction="#toMain" prefHeight="39.0" prefWidth="91.0"
+           text="Cancel"/>
+   <TextField fx:id="addPartId" alignment="CENTER_RIGHT" disable="true" editable="false" layoutX="236.0" layoutY="141.0"
+              prefHeight="39.0" prefWidth="273.0">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </TextField>
+   <Label layoutX="73.0" layoutY="39.0" prefHeight="80.0" prefWidth="163.0" text="Add Part">
+      <font>
+         <Font name="System Bold" size="36.0"/>
+      </font>
+   </Label>
+   <Label layoutX="64.0" layoutY="147.0" text="ID">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <Label fx:id="addPartCostLabel" layoutX="63.0" layoutY="300.0" text="Price / Cost">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <Label fx:id="addPartNameLabel" layoutX="65.0" layoutY="201.0" text="Name">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <Label fx:id="addPartSourceLbl" layoutX="63.0" layoutY="402.0" prefHeight="27.0" prefWidth="163.0" text="Machine ID">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <Label fx:id="addPartMinMaxLabel" layoutX="65.0" layoutY="351.0" text="Min / Max Stock">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <Label fx:id="addPartInvLabel" layoutX="63.0" layoutY="248.0" text="Inventory">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="addPartName" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="195.0" prefHeight="39.0"
+              prefWidth="273.0" promptText="Widget">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </TextField>
+   <TextField fx:id="addPartInv" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="242.0" prefHeight="39.0"
+              prefWidth="273.0" promptText="Inventory Level">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </TextField>
+   <TextField fx:id="addPartCost" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="294.0" prefHeight="39.0"
+              prefWidth="273.0" promptText="99.99">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </TextField>
+   <TextField fx:id="addPartMin" alignment="CENTER" layoutX="236.0" layoutY="345.0" prefHeight="39.0" prefWidth="130.0"
+              promptText="MIN">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </TextField>
+   <TextField fx:id="addPartSourceInput" alignment="CENTER_RIGHT" layoutX="236.0" layoutY="396.0" prefHeight="39.0"
+              prefWidth="273.0" promptText="Machine Number">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </TextField>
+   <RadioButton fx:id="addPartInHouse" layoutX="249.0" layoutY="60.0" mnemonicParsing="false" onAction="#sourceSwitch"
+                prefHeight="39.0" prefWidth="125.0" selected="true" text="In-House">
+      <font>
+         <Font size="18.0"/>
+      </font>
+      <toggleGroup>
+         <ToggleGroup/>
+      </toggleGroup>
+   </RadioButton>
+   <RadioButton layoutX="381.0" layoutY="60.0" mnemonicParsing="false" onAction="#sourceSwitch" prefHeight="39.0"
+                prefWidth="125.0" text="Outsourced" >
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </RadioButton>
+   <TextField fx:id="addPartMax" alignment="CENTER" layoutX="382.0" layoutY="345.0" prefHeight="39.0" prefWidth="130.0"
+              promptText="MAX">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </TextField>
+   <Label layoutX="221.0" layoutY="102.0" prefHeight="35.0" prefWidth="197.0" textAlignment="CENTER" textFill="RED">
+      <font>
+         <Font name="System Bold" size="24.0"/>
+      </font>
+   </Label>
+   <Label fx:id="addPartNameWarning" layoutX="67.0" layoutY="226.0" prefHeight="17.0" prefWidth="155.0" textFill="RED"/>
+   <Label fx:id="addPartStockWarning" layoutX="67.0" layoutY="271.0" prefHeight="17.0" prefWidth="163.0"
+          textFill="RED"/>
+   <Label fx:id="addPartCostWarning" layoutX="67.0" layoutY="325.0" prefHeight="17.0" prefWidth="163.0" textFill="RED"/>
+   <Label fx:id="addPartMinMaxWarning" layoutX="67.0" layoutY="376.0" prefHeight="17.0" prefWidth="163.0"
+          textFill="RED"/>
+   <Label fx:id="addPartSourceWarning" layoutX="68.0" layoutY="427.0" prefHeight="17.0" prefWidth="163.0"
+          textFill="RED"/>
 </AnchorPane>

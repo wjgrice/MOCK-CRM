@@ -101,17 +101,25 @@ public class Inventory {
      *
      */
     public static boolean deletePart(Part selectedPart){
-
-        return false;
+        try {
+            allParts.remove(selectedPart);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     /**
      *
      *
      */
-    public static boolean deleteProduct(Part selectedProduct){
-
-        return false;
+    public static boolean deleteProduct(Product selectedProduct){
+        try {
+            allProducts.remove(selectedProduct);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     /**

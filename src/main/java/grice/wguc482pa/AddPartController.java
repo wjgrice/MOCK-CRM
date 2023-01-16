@@ -12,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -75,98 +74,62 @@ public class AddPartController implements Initializable {
      * @throws IOException From FXMLLoader.
      */
     public boolean addPartSave(ActionEvent actionEvent) throws IOException {
-
-
-        // Check all the fields for input and alert for any that are empty.
-        // If not empty clear any alerts that are present
-        // INIT list of with all fields loaded to check entry validation
+        // Load label containers into list
         FieldsDAO[] allFields = {nameFields, stockFields, priceFields, minFields, maxFields, sourceFields};
-        for (FieldsDAO field : allFields) {
-            if (field.textField.getText().trim().equals("")) {
-                Helper.setAlert(field, "Missing Input");
-            } else {
-                Helper.clearAlert(field);
-            }
-        }
 
-        // Check validity of integer entries. INT validations are variable due to nature of source field.
-        // Setup Arraylist which can be expanded as needed.
-        ArrayList<FieldsDAO> intFields = new ArrayList<>();
-        intFields.add(stockFields);
-        intFields.add(priceFields);
-        intFields.add(minFields);
-        intFields.add(maxFields);
-        // Check if In-House radio button is selected.  Add partSource to inFields for Int validation if so.
-        if (addPartInHouse.selectedProperty().getValue()) {
-            intFields.add(sourceFields);
+        // Setup source field name based on current selection.
+        if(addPartInHouse.selectedProperty().getValue()){
+            sourceFields.label.setText("Machine ID");
+        } else {
+            sourceFields.label.setText("Company Name");
         }
-
-        for (FieldsDAO field : intFields) {
-            Pair p = Helper.checkInt(field);
-            if (p.getKey().equals(false)) {
-                Helper.setAlert(field, "Enter Valid Integer");
-            } else {
-                Helper.clearAlert(field);
-            }
-        }
-
-        // Check validity of double entries
-        // INIT small list with just double value field that need to be checked.
-        FieldsDAO[] doubleFields = {priceFields};
-        for (FieldsDAO field : doubleFields) {
-            Pair p = Helper.checkDbl(field);
-            if (p.getKey().equals(false)) {
-                Helper.setAlert(field, "Enter Valid Float");
-            } else {
-                Helper.clearAlert(field);
-            }
-        }
-
 
         // Setup variables for easy part creation
         int id = Inventory.getCounter();
-        String name = nameFields.textField.getText();
-        Double price = (Double) Helper.checkDbl(priceFields).getValue();
-        Integer stock = (Integer) Helper.checkInt(stockFields).getValue();
-        Integer min = (Integer) Helper.checkInt(minFields).getValue();
-        Integer max = (Integer) Helper.checkInt(maxFields).getValue();
+        String name = allFields[0].textField.getText();
+        Double price = (Double) Helper.checkDbl(allFields[2]).getValue();
+        Integer stock = (Integer) Helper.checkInt(allFields[1]).getValue();
+        Integer min = (Integer) Helper.checkInt(allFields[3]).getValue();
+        Integer max = (Integer) Helper.checkInt(allFields[4]).getValue();
 
         // All fields have any entry of the correct type.  Now check validity of min/max and stock levels.
-        if (noAlerts()){
+        if (Helper.noAlerts(allFields, addPartInHouse)){
             if(min > max){
                 System.out.print("HEre");
-                Helper.setAlert(minFields, "MIN not less than MAX");
+                Helper.setAlert(allFields[3], "MIN not less than MAX");
                 return false;
             }
             if(stock < min || stock > max){
                 System.out.print("HEre");
-                Helper.setAlert(stockFields, "Must be between MIN/MAX");
+                Helper.setAlert(allFields[1], "Must be between MIN/MAX");
                 return false;
             }
         }
 
-        if (noAlerts()) {
+        // All validation has passed.  Create the parts in inventory.
+        if (Helper.noAlerts(allFields, addPartInHouse)) {
             // Check if InHouse or Outsourced use int or string as required for source field.
             if (addPartInHouse.selectedProperty().getValue()) {
-                Integer source = (Integer) Helper.checkInt(sourceFields).getValue();
+                Integer source = (Integer) Helper.checkInt(allFields[5]).getValue();
                 Inventory.addPart(new InHouse(id, name, price, stock, min, max, source));
                 toMain(actionEvent);
             }
             if (!(addPartInHouse.selectedProperty().getValue())) {
-                String sourceTxt = sourceFields.textField.getText();
+                String sourceTxt = allFields[5].textField.getText();
                 Inventory.addPart(new Outsourced(id, name, price, stock, min, max, sourceTxt));
                 toMain(actionEvent);
             }
         }
     return true;
     }
-
-    // Return true if there are no active alerts for the screen.
-    private boolean noAlerts(){
-        return !(nameFields.getErrState() || priceFields.getErrState() || stockFields.getErrState() ||
-                minFields.getErrState() ||   maxFields.getErrState() || sourceFields.getErrState());
+    @FXML
+    private void sourceSwitch(){
+        if(addPartInHouse.selectedProperty().getValue()){
+            addPartSourceLbl.setText("Machine ID");
+        } else {
+            addPartSourceLbl.setText("Company Name");
+        }
     }
-
 }
 
 
