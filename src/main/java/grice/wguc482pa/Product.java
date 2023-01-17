@@ -1,5 +1,6 @@
 package grice.wguc482pa;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -13,7 +14,7 @@ public class Product {
     /**
      * A collection of parts that form the bill of materials for a product.
      */
-    private ObservableList<Part> associatedParts;
+    private final ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     /**
      * The ID of the product.
      */
@@ -61,14 +62,6 @@ public class Product {
      */
     public int getId() {
         return id;
-    }
-
-    /**
-     * @return the string version id
-     */
-    public String getIdString() {
-        String s = "";
-        return String.valueOf(id);
     }
 
     /**
@@ -153,15 +146,19 @@ public class Product {
      *
      */
     public void addAssociatedPart(Part part){
-
+        this.associatedParts.add(part);
     }
     /**
      *
      *
      */
     public boolean deleteAssociatedPart(Part selectedAssociatedPart){
-
-        return false;
+        try {
+            this.associatedParts.remove(selectedAssociatedPart);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 
     /**
@@ -169,8 +166,7 @@ public class Product {
      *
      */
     public ObservableList<Part> getAllAssociatedParts(){
-
-        return null;
+        return associatedParts;
     }
 
 }

@@ -3,17 +3,11 @@ package grice.wguc482pa;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class mainController implements Initializable {
@@ -67,7 +61,12 @@ public class mainController implements Initializable {
         productMaxCol.setCellValueFactory(new PropertyValueFactory<>("max"));
     }
     public void addPart(ActionEvent actionEvent) throws IOException {
-        screenChange("/grice/wguc482pa/addPartView.fxml", actionEvent);
+        Helper.screenChange("/grice/wguc482pa/addPartView.fxml", actionEvent);
+    }
+
+
+    public void addProduct(ActionEvent actionEvent) throws IOException {
+        Helper.screenChange("/grice/wguc482pa/addProductView.fxml", actionEvent);
     }
 
     @FXML
@@ -80,32 +79,30 @@ public class mainController implements Initializable {
             // Pass selected part to mod screen by setting static member in modPartController
             ModifyPartController.selectedPart(mainPartTbl.getSelectionModel().getSelectedItem());
             // Load modPartController
-            screenChange("/grice/wguc482pa/modifyPartView.fxml", actionEvent); }
+            Helper.screenChange("/grice/wguc482pa/modifyPartView.fxml", actionEvent); }
     }
-
-    public void addProduct(ActionEvent actionEvent) throws IOException {
-        screenChange("/grice/wguc482pa/addProductView.fxml", actionEvent);
-    }
-
+    @FXML private Label mainProductWarning;
     public void modProduct(ActionEvent actionEvent) throws IOException {
-        screenChange("/grice/wguc482pa/modifyProductView.fxml", actionEvent);
+        if (mainProductTbl.getSelectionModel().isEmpty()) {
+            Helper.setWarningLabel(mainProductWarning, "Select item from Part list before proceeding");
+        } else {
+            // Pass selected part to mod screen by setting static member in modPartController
+            ModifyProductController.setIncomingProd(mainProductTbl.getSelectionModel().getSelectedItem());
+            // Load modProductController
+            Helper.screenChange("/grice/wguc482pa/modifyProductView.fxml", actionEvent);
+        }
     }
-    public void screenChange(String path, ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(path)));
-        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
     @FXML
     private TextField mainPartSearch; // Text entry field to capture parts searches
     @FXML
     private Label mainPartSearchStatusLabel; // Display parts search result status
-    FilteredList<Part> namePartFilter = new FilteredList<>(Inventory.getAllParts(), p -> true); // list for name filtering
-    FilteredList<Part> idPartFilter = new FilteredList<>(Inventory.getAllParts(), p -> true); // list for id filtering
+
     @FXML
     public void mainPartsSearchKeyStroke() {
+        FilteredList<Part> namePartFilter = new FilteredList<>(Inventory.getAllParts(), p -> true); // list for name filtering
+        FilteredList<Part> idPartFilter = new FilteredList<>(Inventory.getAllParts(), p -> true); // list for id filtering
         String filter = mainPartSearch.getText(); // Initialize filter by getting text from search box
         mainPartSearchStatusLabel.setText(""); // Initialize Status label by setting to empty string.
         mainPartTbl.getSelectionModel().clearSelection(); // Initialize tableview Selection by clearing it
@@ -142,10 +139,11 @@ public class mainController implements Initializable {
     private TextField mainProductSearch; // Text entry field to capture Products searches
     @FXML
     private Label mainProductSearchStatusLabel; // Display Products search result status
-    FilteredList<Product> nameProductFilter = new FilteredList<>(Inventory.getAllProducts(), p -> true); //obslist for name filtering
-    FilteredList<Product> idProductFilter = new FilteredList<>(Inventory.getAllProducts(), p -> true); // obslist for id filtering
+
     @FXML
     public void mainProductSearchKeystroke(){
+        FilteredList<Product> nameProductFilter = new FilteredList<>(Inventory.getAllProducts(), p -> true); //obslist for name filtering
+        FilteredList<Product> idProductFilter = new FilteredList<>(Inventory.getAllProducts(), p -> true); // obslist for id filtering
         String filter = mainProductSearch.getText(); // Initialize filter by getting text from search box
         mainProductSearchStatusLabel.setText(""); // Initialize Status label by setting to empty string.
         mainProductTbl.getSelectionModel().clearSelection(); // Initialize tableview Selection by clearing it
@@ -164,7 +162,7 @@ public class mainController implements Initializable {
             }
             if(nameProductFilter.isEmpty()){
                 // If no matches using nameProductFilter check using idProductFilter list
-                idProductFilter.setPredicate(Product -> Product.getIdString().contains(filter));
+                idProductFilter.setPredicate(Product -> String.valueOf(Product.getId()).contains(filter));
                 mainProductTbl.setItems(idProductFilter);
                 if(idProductFilter.size() == 1) {
                     // If idProductfilter has a single item set tableView to select it
@@ -191,7 +189,6 @@ public class mainController implements Initializable {
             Inventory.deletePart(mainPartTbl.getSelectionModel().getSelectedItem());
             }
     }
-    @FXML private Label mainProductWarning;
     public void mainProductDel() {
         // Check for part selection.  Throw warning label if no selection present
         if(mainProductTbl.getSelectionModel().isEmpty()) {

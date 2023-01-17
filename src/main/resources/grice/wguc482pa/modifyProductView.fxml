@@ -15,81 +15,81 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="26.0" layoutY="193.0" prefHeight="27.0" prefWidth="57.0" text="Name">
+        <Label fx:id="modProdNameLabel" layoutX="26.0" layoutY="193.0" prefHeight="27.0" prefWidth="57.0" text="Name">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="24.0" layoutY="246.0" prefHeight="27.0" prefWidth="31.0" text="Inv">
+        <Label fx:id="modProdStockLabel" layoutX="24.0" layoutY="246.0" prefHeight="27.0" prefWidth="31.0" text="Inv">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="24.0" layoutY="302.0" text="Price">
+        <Label fx:id="modProdPriceLabel" layoutX="24.0" layoutY="302.0" text="Price">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label layoutX="22.0" layoutY="353.0" prefHeight="27.0" prefWidth="47.0" text="Max">
+        <Label fx:id="modProdMaxLabel" layoutX="181.0" layoutY="357.0" prefHeight="27.0" prefWidth="47.0" text="Max">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <TextField fx:id="modProductId" layoutX="113.0" layoutY="146.0" prefHeight="25.0" prefWidth="202.0">
+        <TextField fx:id="modProdId" disable="true" editable="false" layoutX="94.0" layoutY="145.0" prefHeight="25.0" prefWidth="202.0">
             <font>
                 <Font size="14.0" />
             </font></TextField>
-        <TextField fx:id="modProductName" layoutX="113.0" layoutY="194.0" prefHeight="25.0" prefWidth="202.0">
+        <TextField fx:id="modProdName" layoutX="94.0" layoutY="193.0" prefHeight="25.0" prefWidth="202.0">
             <font>
                 <Font size="14.0" />
             </font></TextField>
-        <TextField fx:id="modProductInv" layoutX="113.0" layoutY="247.0" prefHeight="25.0" prefWidth="74.0">
+        <TextField fx:id="modProductInv" layoutX="94.0" layoutY="246.0" prefHeight="25.0" prefWidth="74.0">
             <font>
                 <Font size="14.0" />
             </font></TextField>
-        <TextField fx:id="modProductPrice" layoutX="113.0" layoutY="303.0" prefHeight="25.0" prefWidth="74.0">
+        <TextField fx:id="modProdPrice" layoutX="94.0" layoutY="302.0" prefHeight="25.0" prefWidth="74.0">
             <font>
                 <Font size="14.0" />
             </font></TextField>
-        <TextField fx:id="modProductMax" layoutX="113.0" layoutY="354.0" prefHeight="25.0" prefWidth="74.0">
+        <TextField fx:id="modProdMax" layoutX="228.0" layoutY="355.0" prefHeight="25.0" prefWidth="74.0">
             <font>
                 <Font size="14.0" />
             </font></TextField>
-        <Label layoutX="199.0" layoutY="355.0" prefHeight="30.0" prefWidth="31.0" text="Min">
+        <Label fx:id="modProdMinLabel" layoutX="28.0" layoutY="356.0" prefHeight="30.0" prefWidth="31.0" text="Min">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <TextField fx:id="modProductMin" layoutX="239.0" layoutY="354.0" prefHeight="30.0" prefWidth="74.0">
+        <TextField fx:id="modProdMin" layoutX="94.0" layoutY="355.0" prefHeight="30.0" prefWidth="74.0">
             <font>
                 <Font size="14.0" />
             </font></TextField>
-        <TextField fx:id="modProductSearch" alignment="CENTER_RIGHT" layoutX="663.0" layoutY="69.0" prefHeight="25.0" prefWidth="332.0" promptText="Search by Part ID or Name">
+        <TextField fx:id="modProductSearch" alignment="CENTER_RIGHT" layoutX="663.0" layoutY="69.0" onKeyTyped="#modProdSearchKeystroke" prefHeight="25.0" prefWidth="332.0" promptText="Search by Part ID or Name">
             <font>
                 <Font size="14.0" />
             </font></TextField>
-        <TableView fx:id="modProductPartTbl" layoutX="545.0" layoutY="124.0" prefHeight="200.0" prefWidth="450.0">
+        <TableView fx:id="modProdPartTbl" layoutX="545.0" layoutY="124.0" prefHeight="200.0" prefWidth="450.0">
             <columns>
-                <TableColumn prefWidth="94.0" text="Part ID" />
-                <TableColumn prefWidth="219.0" text="Part Name" />
-                <TableColumn prefWidth="59.0" text="Inv Level" />
-                <TableColumn prefWidth="66.0" text="Unit Cost" />
+                <TableColumn fx:id="modProdPartIdCol" prefWidth="94.0" text="Part ID" />
+                <TableColumn fx:id="modProdPartNameCol" prefWidth="219.0" text="Part Name" />
+                <TableColumn fx:id="modProdPartInvCol" prefWidth="59.0" text="Inv Level" />
+                <TableColumn fx:id="modProdPartPriceCol" prefWidth="66.0" text="Unit Cost" />
             </columns>
         </TableView>
-        <TableView fx:id="modProductProductTbl" layoutX="545.0" layoutY="414.0" prefHeight="200.0" prefWidth="450.0">
+        <TableView fx:id="modProdAscTbl" layoutX="545.0" layoutY="414.0" prefHeight="200.0" prefWidth="450.0">
             <columns>
-                <TableColumn prefWidth="94.0" text="Part ID" />
-                <TableColumn prefWidth="219.0" text="Part Name" />
-                <TableColumn prefWidth="59.0" text="Inv Level" />
-                <TableColumn prefWidth="66.0" text="Unit Cost" />
+                <TableColumn fx:id="modProdAscIdCol" prefWidth="94.0" text="Part ID" />
+                <TableColumn fx:id="modProdAscNameCol" prefWidth="219.0" text="Part Name" />
+                <TableColumn fx:id="modProdAscStockCol" prefWidth="59.0" text="Inv Level" />
+                <TableColumn fx:id="modProdAscPriceCol" prefWidth="66.0" text="Unit Cost" />
             </columns>
         </TableView>
-        <Button fx:id="modProductAddBtn" layoutX="895.0" layoutY="343.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="98.0" text="Add">
+        <Button fx:id="modProductAddBtn" layoutX="895.0" layoutY="343.0" mnemonicParsing="false" onAction="#modProdAddBtn" prefHeight="39.0" prefWidth="98.0" text="Add">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
-        <Button fx:id="modProductRemovePartBtn" layoutX="791.0" layoutY="623.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="202.0" text="Remove Part">
+        <Button fx:id="modProductRemovePartBtn" layoutX="791.0" layoutY="623.0" mnemonicParsing="false" onAction="#modProdRmvBtn" prefHeight="39.0" prefWidth="202.0" text="Remove Part">
             <font>
                 <Font size="18.0" />
             </font>
@@ -104,5 +104,14 @@
                 <Font size="18.0" />
             </font>
         </Button>
+      <Label fx:id="modProdNameWarn" layoutX="94.0" layoutY="223.0" prefHeight="17.0" prefWidth="375.0" textFill="RED" />
+      <Label fx:id="modProdStockWarn" layoutX="94.0" layoutY="276.0" prefHeight="17.0" prefWidth="303.0" textFill="RED" />
+      <Label fx:id="modProdPriceWarn" layoutX="94.0" layoutY="334.0" prefHeight="17.0" prefWidth="268.0" textFill="RED" />
+      <Label fx:id="modProdMaxWarn" layoutX="94.0" layoutY="385.0" prefHeight="17.0" prefWidth="202.0" textFill="RED" />
+      <Label fx:id="modProdMinWarn" layoutX="94.0" layoutY="405.0" prefHeight="17.0" prefWidth="202.0" textFill="RED" />
+      <Label layoutX="694.0" layoutY="102.0" prefHeight="17.0" prefWidth="303.0" text="Label" />
+      <Label fx:id="modProdAddPartWarn" layoutX="762.0" layoutY="327.0" prefHeight="17.0" prefWidth="230.0" textFill="RED" />
+      <Label fx:id="modProdRmvWarn" layoutX="724.0" layoutY="662.0" prefHeight="17.0" prefWidth="268.0" textFill="RED" />
+      <Label fx:id="modProductSearchLabel" layoutX="508.0" layoutY="76.0" prefHeight="17.0" prefWidth="137.0" textFill="RED" />
     </children>
 </AnchorPane>

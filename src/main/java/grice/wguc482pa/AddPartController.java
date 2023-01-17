@@ -58,7 +58,7 @@ public class AddPartController implements Initializable {
      * @throws IOException From FXMLLoader.
      */
     public void toMain(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/grice/wguc482pa/mainView.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/grice/wguc482pa/mainView.fxml")));
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -95,12 +95,10 @@ public class AddPartController implements Initializable {
         // All fields have any entry of the correct type.  Now check validity of min/max and stock levels.
         if (Helper.noAlerts(allFields, addPartInHouse)){
             if(min > max){
-                System.out.print("HEre");
                 Helper.setAlert(allFields[3], "MIN not less than MAX");
                 return false;
             }
             if(stock < min || stock > max){
-                System.out.print("HEre");
                 Helper.setAlert(allFields[1], "Must be between MIN/MAX");
                 return false;
             }

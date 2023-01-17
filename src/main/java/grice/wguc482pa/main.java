@@ -6,19 +6,17 @@ package grice.wguc482pa;
  */
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * This application models an inventory management program which represents Parts and part assemblies
  * identified as Products along with thier associated values and inventory levels.
- *
  *  FUTURE ENHANCEMENT - A potential new feature for consideration would be the inclusion of a reporting tool to create manual and automated
  *  reports for key metrics such as: inventory levels, value of inventory on hand, automated notification of low
  *  stock levels
@@ -30,7 +28,7 @@ public class main extends Application{
     /**
      * The start method uses FXML to create the initial/main stage of the application.
      *
-     * @param stage
+     * @param stage Initial program stage
      * @throws Exception
      */
     @Override
