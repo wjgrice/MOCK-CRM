@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class mainController implements Initializable {
@@ -185,17 +186,38 @@ public class mainController implements Initializable {
         if(mainPartTbl.getSelectionModel().isEmpty()) {
             Helper.setWarningLabel(mainPartModWarning, "Select item from Part list before proceeding");
         } else {
-            // Pass selected part to mod screen by setting static member in modPartController
-            Inventory.deletePart(mainPartTbl.getSelectionModel().getSelectedItem());
+            // Setup and display dialog box to confirm action
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Delete");
+            alert.setHeaderText("Confirm");
+            alert.setContentText("Delete selected Part?");
+            Optional<ButtonType> res = alert.showAndWait();
+            if(res.get() == ButtonType.OK) {
+                // Pass selected part to mod screen by setting static member in modPartController
+                Inventory.deletePart(mainPartTbl.getSelectionModel().getSelectedItem());
             }
+        }
     }
     public void mainProductDel() {
         // Check for part selection.  Throw warning label if no selection present
         if(mainProductTbl.getSelectionModel().isEmpty()) {
             Helper.setWarningLabel(mainProductWarning, "Select item from Part list before proceeding");
         } else {
-            // Pass selected part to mod screen by setting static member in modPartController
-            Inventory.deleteProduct(mainProductTbl.getSelectionModel().getSelectedItem());
+            // If associated parts table empty then pass selected part to mod screen by setting static member in modPartController
+            if(mainProductTbl.getSelectionModel().getSelectedItem().getAllAssociatedParts().isEmpty()){
+                // Setup and display dialog box to confirm action
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirm Delete");
+                alert.setHeaderText("Confirm");
+                alert.setContentText("Delete selected Product?");
+                Optional<ButtonType> res = alert.showAndWait();
+                if(res.get() == ButtonType.OK) {
+                    Inventory.deleteProduct(mainProductTbl.getSelectionModel().getSelectedItem());
+                }
+            } else {
+                // If associated parts not empty then trow warning label
+                mainProductWarning.setText("Associated parts must be deleted first.");
+            }
         }
     }
 }

@@ -37,10 +37,7 @@ public class ModifyPartController implements Initializable {
     public static void selectedPart(Part selectedPart) {
         ModifyPartController.selectedPart = selectedPart;
     }
-    /**
-     * The controller for the modify part view
-     * @author William Grice
-     */
+
     /**
      * Init process which always runs first when the controller is called.  In this instance it's used to
      * load fields with part data passed from main screen.  Addtionally it's sets up the innitial state for
@@ -118,15 +115,19 @@ public class ModifyPartController implements Initializable {
             // Check if InHouse or Outsourced use int or string as required for source field.
             if (modPartInHouse.selectedProperty().getValue()) {
                 Integer source = (Integer) Helper.checkInt(allFields[5]).getValue();
-                Inventory.deletePart(selectedPart);
-                Inventory.addPart(new InHouse(id, name, price, stock, min, max, source));
-                toMain(actionEvent);
+                // Added a fail check for error logging could be a good future feature implementation
+                if(Inventory.deletePart(selectedPart)) {
+                    Inventory.addPart(new InHouse(id, name, price, stock, min, max, source));
+                    toMain(actionEvent);
+                }
             }
             if (!(modPartInHouse.selectedProperty().getValue())) {
                 String sourceTxt = allFields[5].textField.getText();
-                Inventory.deletePart(selectedPart);
-                Inventory.addPart(new Outsourced(id, name, price, stock, min, max, sourceTxt));
-                toMain(actionEvent);
+                // Added a fail check for error logging could be a good future feature implementation
+                if(Inventory.deletePart(selectedPart)) {
+                    Inventory.addPart(new Outsourced(id, name, price, stock, min, max, sourceTxt));
+                    toMain(actionEvent);
+                }
             }
         }
         return true;

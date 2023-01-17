@@ -4,114 +4,130 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="modProductAnchor" prefHeight="771.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grice.wguc482pa.ModifyProductController">
-    <children>
-        <Label layoutX="29.0" layoutY="28.0" prefHeight="82.0" prefWidth="279.0" text="Modify Product">
-            <font>
-                <Font name="System Bold" size="36.0" />
-            </font></Label>
-        <Label layoutX="28.0" layoutY="145.0" prefHeight="27.0" prefWidth="24.0" text="ID">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <Label fx:id="modProdNameLabel" layoutX="26.0" layoutY="193.0" prefHeight="27.0" prefWidth="57.0" text="Name">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <Label fx:id="modProdStockLabel" layoutX="24.0" layoutY="246.0" prefHeight="27.0" prefWidth="31.0" text="Inv">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <Label fx:id="modProdPriceLabel" layoutX="24.0" layoutY="302.0" text="Price">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <Label fx:id="modProdMaxLabel" layoutX="181.0" layoutY="357.0" prefHeight="27.0" prefWidth="47.0" text="Max">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <TextField fx:id="modProdId" disable="true" editable="false" layoutX="94.0" layoutY="145.0" prefHeight="25.0" prefWidth="202.0">
-            <font>
-                <Font size="14.0" />
-            </font></TextField>
-        <TextField fx:id="modProdName" layoutX="94.0" layoutY="193.0" prefHeight="25.0" prefWidth="202.0">
-            <font>
-                <Font size="14.0" />
-            </font></TextField>
-        <TextField fx:id="modProductInv" layoutX="94.0" layoutY="246.0" prefHeight="25.0" prefWidth="74.0">
-            <font>
-                <Font size="14.0" />
-            </font></TextField>
-        <TextField fx:id="modProdPrice" layoutX="94.0" layoutY="302.0" prefHeight="25.0" prefWidth="74.0">
-            <font>
-                <Font size="14.0" />
-            </font></TextField>
-        <TextField fx:id="modProdMax" layoutX="228.0" layoutY="355.0" prefHeight="25.0" prefWidth="74.0">
-            <font>
-                <Font size="14.0" />
-            </font></TextField>
-        <Label fx:id="modProdMinLabel" layoutX="28.0" layoutY="356.0" prefHeight="30.0" prefWidth="31.0" text="Min">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Label>
-        <TextField fx:id="modProdMin" layoutX="94.0" layoutY="355.0" prefHeight="30.0" prefWidth="74.0">
-            <font>
-                <Font size="14.0" />
-            </font></TextField>
-        <TextField fx:id="modProductSearch" alignment="CENTER_RIGHT" layoutX="663.0" layoutY="69.0" onKeyTyped="#modProdSearchKeystroke" prefHeight="25.0" prefWidth="332.0" promptText="Search by Part ID or Name">
-            <font>
-                <Font size="14.0" />
-            </font></TextField>
-        <TableView fx:id="modProdPartTbl" layoutX="545.0" layoutY="124.0" prefHeight="200.0" prefWidth="450.0">
-            <columns>
-                <TableColumn fx:id="modProdPartIdCol" prefWidth="94.0" text="Part ID" />
-                <TableColumn fx:id="modProdPartNameCol" prefWidth="219.0" text="Part Name" />
-                <TableColumn fx:id="modProdPartInvCol" prefWidth="59.0" text="Inv Level" />
-                <TableColumn fx:id="modProdPartPriceCol" prefWidth="66.0" text="Unit Cost" />
-            </columns>
-        </TableView>
-        <TableView fx:id="modProdAscTbl" layoutX="545.0" layoutY="414.0" prefHeight="200.0" prefWidth="450.0">
-            <columns>
-                <TableColumn fx:id="modProdAscIdCol" prefWidth="94.0" text="Part ID" />
-                <TableColumn fx:id="modProdAscNameCol" prefWidth="219.0" text="Part Name" />
-                <TableColumn fx:id="modProdAscStockCol" prefWidth="59.0" text="Inv Level" />
-                <TableColumn fx:id="modProdAscPriceCol" prefWidth="66.0" text="Unit Cost" />
-            </columns>
-        </TableView>
-        <Button fx:id="modProductAddBtn" layoutX="895.0" layoutY="343.0" mnemonicParsing="false" onAction="#modProdAddBtn" prefHeight="39.0" prefWidth="98.0" text="Add">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Button fx:id="modProductRemovePartBtn" layoutX="791.0" layoutY="623.0" mnemonicParsing="false" onAction="#modProdRmvBtn" prefHeight="39.0" prefWidth="202.0" text="Remove Part">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Button fx:id="modProductSaveBtn" layoutX="791.0" layoutY="695.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="86.0" text="Save">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-        <Button fx:id="modProductCancelBtn" layoutX="906.0" layoutY="694.0" mnemonicParsing="false" onAction="#toMain" prefHeight="39.0" prefWidth="86.0" text="Cancel">
-            <font>
-                <Font size="18.0" />
-            </font>
-        </Button>
-      <Label fx:id="modProdNameWarn" layoutX="94.0" layoutY="223.0" prefHeight="17.0" prefWidth="375.0" textFill="RED" />
-      <Label fx:id="modProdStockWarn" layoutX="94.0" layoutY="276.0" prefHeight="17.0" prefWidth="303.0" textFill="RED" />
-      <Label fx:id="modProdPriceWarn" layoutX="94.0" layoutY="334.0" prefHeight="17.0" prefWidth="268.0" textFill="RED" />
-      <Label fx:id="modProdMaxWarn" layoutX="94.0" layoutY="385.0" prefHeight="17.0" prefWidth="202.0" textFill="RED" />
-      <Label fx:id="modProdMinWarn" layoutX="94.0" layoutY="405.0" prefHeight="17.0" prefWidth="202.0" textFill="RED" />
-      <Label layoutX="694.0" layoutY="102.0" prefHeight="17.0" prefWidth="303.0" text="Label" />
-      <Label fx:id="modProdAddPartWarn" layoutX="762.0" layoutY="327.0" prefHeight="17.0" prefWidth="230.0" textFill="RED" />
-      <Label fx:id="modProdRmvWarn" layoutX="724.0" layoutY="662.0" prefHeight="17.0" prefWidth="268.0" textFill="RED" />
-      <Label fx:id="modProductSearchLabel" layoutX="508.0" layoutY="76.0" prefHeight="17.0" prefWidth="137.0" textFill="RED" />
-    </children>
+<AnchorPane prefHeight="771.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="grice.wguc482pa.ModifyProductController">
+    <Label layoutX="29.0" layoutY="28.0" prefHeight="82.0" prefWidth="279.0" text="Modify Product">
+        <font>
+            <Font name="System Bold" size="36.0"/>
+        </font>
+    </Label>
+    <Label layoutX="28.0" layoutY="145.0" prefHeight="27.0" prefWidth="24.0" text="ID">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <Label fx:id="modProdNameLabel" layoutX="26.0" layoutY="193.0" prefHeight="27.0" prefWidth="57.0" text="Name">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <Label fx:id="modProdStockLabel" layoutX="24.0" layoutY="246.0" prefHeight="27.0" prefWidth="31.0" text="Inv">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <Label fx:id="modProdPriceLabel" layoutX="24.0" layoutY="302.0" text="Price">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <Label fx:id="modProdMaxLabel" layoutX="181.0" layoutY="357.0" prefHeight="27.0" prefWidth="47.0" text="Max">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <TextField fx:id="modProdId" disable="true" editable="false" layoutX="94.0" layoutY="145.0" prefHeight="25.0"
+               prefWidth="202.0">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </TextField>
+    <TextField fx:id="modProdName" layoutX="94.0" layoutY="193.0" prefHeight="25.0" prefWidth="202.0">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </TextField>
+    <TextField fx:id="modProductInv" layoutX="94.0" layoutY="246.0" prefHeight="25.0" prefWidth="74.0">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </TextField>
+    <TextField fx:id="modProdPrice" layoutX="94.0" layoutY="302.0" prefHeight="25.0" prefWidth="74.0">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </TextField>
+    <TextField fx:id="modProdMax" layoutX="228.0" layoutY="355.0" prefHeight="25.0" prefWidth="74.0">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </TextField>
+    <Label fx:id="modProdMinLabel" layoutX="28.0" layoutY="356.0" prefHeight="30.0" prefWidth="57.0" text="Min">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <TextField fx:id="modProdMin" layoutX="94.0" layoutY="355.0" prefHeight="30.0" prefWidth="74.0">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </TextField>
+    <TextField fx:id="modProductSearch" alignment="CENTER_RIGHT" layoutX="663.0" layoutY="69.0"
+               onKeyTyped="#modProdSearchKeystroke" prefHeight="25.0" prefWidth="332.0"
+               promptText="Search by Part ID or Name">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </TextField>
+    <TableView fx:id="modProdPartTbl" layoutX="545.0" layoutY="124.0" prefHeight="200.0" prefWidth="450.0">
+        <columns>
+            <TableColumn fx:id="modProdPartIdCol" prefWidth="94.0" text="Part ID"/>
+            <TableColumn fx:id="modProdPartNameCol" prefWidth="219.0" text="Part Name"/>
+            <TableColumn fx:id="modProdPartInvCol" prefWidth="59.0" text="Inv Level"/>
+            <TableColumn fx:id="modProdPartPriceCol" prefWidth="66.0" text="Unit Cost"/>
+        </columns>
+    </TableView>
+    <TableView fx:id="modProdAscTbl" layoutX="545.0" layoutY="414.0" prefHeight="200.0" prefWidth="450.0">
+        <columns>
+            <TableColumn fx:id="modProdAscIdCol" prefWidth="94.0" text="Part ID"/>
+            <TableColumn fx:id="modProdAscNameCol" prefWidth="219.0" text="Part Name"/>
+            <TableColumn fx:id="modProdAscStockCol" prefWidth="59.0" text="Inv Level"/>
+            <TableColumn fx:id="modProdAscPriceCol" prefWidth="66.0" text="Unit Cost"/>
+        </columns>
+    </TableView>
+    <Button layoutX="895.0" layoutY="343.0" mnemonicParsing="false" onAction="#modProdAddBtn"
+            prefHeight="39.0" prefWidth="98.0" text="Add">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Button>
+    <Button  layoutX="791.0" layoutY="623.0" mnemonicParsing="false"
+            onAction="#modProdRmvBtn" prefHeight="39.0" prefWidth="202.0" text="Remove Part">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Button>
+    <Button layoutX="791.0" layoutY="695.0" mnemonicParsing="false" onAction="#modProdSaveBtn"
+            prefHeight="39.0" prefWidth="86.0" text="Save">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Button>
+    <Button layoutX="906.0" layoutY="694.0" mnemonicParsing="false" onAction="#toMain"
+            prefHeight="39.0" prefWidth="86.0" text="Cancel">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Button>
+    <Label fx:id="modProdNameWarn" layoutX="94.0" layoutY="223.0" prefHeight="17.0" prefWidth="375.0" textFill="RED"/>
+    <Label fx:id="modProdStockWarn" layoutX="94.0" layoutY="276.0" prefHeight="17.0" prefWidth="303.0" textFill="RED"/>
+    <Label fx:id="modProdPriceWarn" layoutX="94.0" layoutY="334.0" prefHeight="17.0" prefWidth="268.0" textFill="RED"/>
+    <Label fx:id="modProdMaxWarn" layoutX="228.0" layoutY="386.0" prefHeight="17.0" prefWidth="187.0" textFill="RED"/>
+    <Label fx:id="modProdMinWarn" layoutX="94.0" layoutY="386.0" prefHeight="17.0" prefWidth="137.0" textFill="RED"/>
+    <Label layoutX="694.0" layoutY="102.0" prefHeight="17.0" prefWidth="303.0" text="Label"/>
+    <Label fx:id="modProdAddPartWarn" layoutX="762.0" layoutY="327.0" prefHeight="17.0" prefWidth="230.0"
+           textFill="RED"/>
+    <Label fx:id="modProdRmvWarn" layoutX="724.0" layoutY="662.0" prefHeight="17.0" prefWidth="268.0" textFill="RED"/>
+    <Label fx:id="modProductSearchLabel" layoutX="508.0" layoutY="76.0" prefHeight="17.0" prefWidth="137.0"
+           textFill="RED"/>
 </AnchorPane>

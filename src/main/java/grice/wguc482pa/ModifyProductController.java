@@ -1,12 +1,5 @@
 package grice.wguc482pa;
 
-/**
- * The controller for the modify product view.
- * @author William Grice
- */
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -133,7 +127,7 @@ public class ModifyProductController implements Initializable {
 
     @FXML private Label modProdAddPartWarn, modProdRmvWarn;
 
-    public void modProdAddBtn(ActionEvent actionEvent) {
+    public void modProdAddBtn() {
         // Check for part selection.  Throw warning label if no selection present
         if(modProdPartTbl.getSelectionModel().isEmpty()) {
             Helper.setWarningLabel(modProdAddPartWarn, "Select item from Part list before proceeding");
@@ -147,10 +141,57 @@ public class ModifyProductController implements Initializable {
         if(modProdAscTbl.getSelectionModel().isEmpty()) {
             Helper.setWarningLabel(modProdRmvWarn, "Select item from Part list before proceeding");
         } else {
-            // Pass selected part to mod screen by setting static member in modPartController
-            incomingProd.deleteAssociatedPart(modProdAscTbl.getSelectionModel().getSelectedItem());
-            modProdAscTbl.setItems(incomingProd.getAllAssociatedParts());
+            // Remove part from associated parts list for selected product.
+            // Setup and display dialog box to confirm action
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Delete");
+            alert.setHeaderText("Confirm");
+            alert.setContentText("Delete selected Part?");
+            Optional<ButtonType> res = alert.showAndWait();
+            if(res.get() == ButtonType.OK) {
+                // Pass selected part to mod screen by setting static member in modPartController
+                incomingProd.deleteAssociatedPart(modProdAscTbl.getSelectionModel().getSelectedItem());
+                modProdAscTbl.setItems(incomingProd.getAllAssociatedParts());
+            }
+
         }
+    }
+
+    public boolean modProdSaveBtn(ActionEvent actionEvent) throws IOException {
+        // Load label containers into list
+        FieldsDAO[] allFields = {nameFields, stockFields, priceFields, minFields, maxFields};
+
+        // Setup variables for easy part creation
+        String name = allFields[0].textField.getText();
+        Double price = (Double) Helper.checkDbl(allFields[2]).getValue();
+        Integer stock = (Integer) Helper.checkInt(allFields[1]).getValue();
+        Integer min = (Integer) Helper.checkInt(allFields[3]).getValue();
+        Integer max = (Integer) Helper.checkInt(allFields[4]).getValue();
+
+        // All fields have any entry of the correct type.  Now check validity of min/max and stock levels.
+        if (Helper.noAlerts(allFields)){
+            if(min > max){
+                Helper.setAlert(allFields[3], "MIN not less than MAX");
+                return false;
+            }
+            if(stock < min || stock > max){
+                Helper.setAlert(allFields[1], "Must be between MIN/MAX");
+                return false;
+            }
+        }
+
+        // Validation complete add Product to inventory
+        if (Helper.noAlerts(allFields)) {
+            if(Inventory.deleteProduct(incomingProd)) {
+                Product newProd = new Product(Inventory.getCounter(), name, price, stock, min, max);
+                for (Part part : incomingProd.getAllAssociatedParts()) {
+                    newProd.addAssociatedPart(part);
+                }
+                Inventory.addProduct(newProd);
+                toMain(actionEvent);
+            }
+        }
+        return true;
     }
 //End of Class
 }
