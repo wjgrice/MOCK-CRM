@@ -1,9 +1,14 @@
+/**
+ *
+ * @author William Grice
+ */
 package grice.wguc482pa;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-
+/**
+ * Data Access Object used to manage collections of assocated labels and textfields.
+ */
 public class FieldsDAO {
     public TextField textField;
 
@@ -17,13 +22,6 @@ public class FieldsDAO {
         this.warning = warning;
         this.errState = errState;
     }
-    public TextField getTextField() {
-        return textField;
-    }
-
-    public void setTextField(TextField textField) {
-        this.textField = textField;
-    }
 
     public Label getLabel() {
         return label;
@@ -31,14 +29,6 @@ public class FieldsDAO {
 
     public void setLabel(Label label) {
         this.label = label;
-    }
-
-    public Label getWarning() {
-        return warning;
-    }
-
-    public void setWarning(Label warning) {
-        this.warning = warning;
     }
 
     public boolean getErrState() {

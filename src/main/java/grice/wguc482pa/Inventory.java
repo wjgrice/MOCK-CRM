@@ -11,26 +11,24 @@ import javafx.collections.transformation.FilteredList;
 public class Inventory {
 
     /**
-     *
      * A counter used to increment ID number creation.
      */
     private static int counter = 1000;
 
     /**
-     *
      * A list of Parts
      */
     private static final ObservableList<Part> allParts = FXCollections.observableArrayList();
 
     /**
-     *
      * A list of Products
+     *
      */
     private static final ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     /**
-     *
      * Add newly created Parts to the list of all parts and increment the counter
+     *
      */
     public static  void addPart(Part newPart){
 
@@ -38,7 +36,6 @@ public class Inventory {
     }
 
     /**
-     *
      * Add newly created Products to the list of all products and increment the counter
      */
     public static void addProduct(Product newProduct){
@@ -47,7 +44,7 @@ public class Inventory {
     }
 
     /**
-     *
+     * Lookup and return id of passed in Part
      *
      */
     public static Part lookupPart(int id){
@@ -62,8 +59,9 @@ public class Inventory {
     }
 
     /**
+     * Lookup and return id of passed in Product
      *
-     *
+     * @return Part
      */
     public static Product lookupProduct(int id){
         for (Product product : allProducts){
@@ -77,8 +75,9 @@ public class Inventory {
     }
 
     /**
+     * Lookup and return list containing passed in part name.
      *
-     *
+     * @return List of parts
      */
     public static  ObservableList<Part> lookupPart(String partName){
         // Create list to hold response
@@ -99,8 +98,9 @@ public class Inventory {
     }
 
     /**
+     * Lookup and return list containing passed in product Name
      *
-     *
+     * @return List of Products
      */
     public static  ObservableList<Product> lookupProduct(String productName){
         // Create list to hold response
@@ -121,7 +121,7 @@ public class Inventory {
     }
 
     /**
-     *
+     * Update a part using an index and passed in part
      *
      */
     public static  void updatePart(int index, Part selectedPart){
@@ -130,7 +130,7 @@ public class Inventory {
     }
 
     /**
-     *
+     * Update a product using an index and passed in product
      *
      */
     public static void updateProduct(int index, Product selectedProduct){
@@ -139,8 +139,9 @@ public class Inventory {
     }
 
     /**
+     * Delete a part using a passed in part
      *
-     *
+     * @return boolean
      */
     public static boolean deletePart(Part selectedPart){
         try {
@@ -152,8 +153,9 @@ public class Inventory {
     }
 
     /**
+     * Delete a product using a passed in product
      *
-     *
+     *@return boolean
      */
     public static boolean deleteProduct(Product selectedProduct){
         try {

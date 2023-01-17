@@ -3,7 +3,6 @@
  * @author William Grice
  */
 package grice.wguc482pa;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,6 @@ import java.util.*;
 
 /**
  * Controls logic for add part screen.
- *
  *
  */
 public class AddPartController implements Initializable {
@@ -35,10 +33,11 @@ public class AddPartController implements Initializable {
     // Setup containers for labels and text fields to make label alerts easier
     FieldsDAO nameFields,stockFields,priceFields,minFields,maxFields,sourceFields;
 
-    @Override
     /**
-     * Initializes add pard id text field to next available part number
+     * Initializes add part id text field to next available part number and setups up DAO objects to manage field and
+     * label names.
      */
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Init ID field with temp id number
         addPartId.setText(Inventory.getTempCounter());
@@ -87,10 +86,10 @@ public class AddPartController implements Initializable {
         // Setup variables for easy part creation
         int id = Inventory.getCounter();
         String name = allFields[0].textField.getText();
-        Double price = (Double) Helper.checkDbl(allFields[2]).getValue();
-        Integer stock = (Integer) Helper.checkInt(allFields[1]).getValue();
-        Integer min = (Integer) Helper.checkInt(allFields[3]).getValue();
-        Integer max = (Integer) Helper.checkInt(allFields[4]).getValue();
+        Double price = Helper.checkDbl(allFields[2]).getValue();
+        Integer stock = Helper.checkInt(allFields[1]).getValue();
+        Integer min = Helper.checkInt(allFields[3]).getValue();
+        Integer max = Helper.checkInt(allFields[4]).getValue();
 
         // All fields have any entry of the correct type.  Now check validity of min/max and stock levels.
         if (Helper.noAlerts(allFields, addPartInHouse)){
@@ -108,7 +107,7 @@ public class AddPartController implements Initializable {
         if (Helper.noAlerts(allFields, addPartInHouse)) {
             // Check if InHouse or Outsourced use int or string as required for source field.
             if (addPartInHouse.selectedProperty().getValue()) {
-                Integer source = (Integer) Helper.checkInt(allFields[5]).getValue();
+                Integer source = Helper.checkInt(allFields[5]).getValue();
                 Inventory.addPart(new InHouse(id, name, price, stock, min, max, source));
                 toMain(actionEvent);
             }
@@ -120,6 +119,10 @@ public class AddPartController implements Initializable {
         }
     return true;
     }
+
+    /**
+     *  Changes name of addPart Source label between two options when called
+     */
     @FXML
     private void sourceSwitch(){
         if(addPartInHouse.selectedProperty().getValue()){

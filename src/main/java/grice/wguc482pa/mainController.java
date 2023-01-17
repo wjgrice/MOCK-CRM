@@ -1,3 +1,7 @@
+/**
+ *
+ * @author William Grice
+ */
 package grice.wguc482pa;
 
 import javafx.collections.transformation.FilteredList;
@@ -41,6 +45,9 @@ public class mainController implements Initializable {
     @FXML
     private TableColumn<Product, Integer> productMaxCol;
 
+    /**
+     * Init method used to set up initial state of main controller screen
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Populate Main Parts List with values from observablelist of parts
@@ -61,17 +68,28 @@ public class mainController implements Initializable {
         productMinCol.setCellValueFactory(new PropertyValueFactory<>("min"));
         productMaxCol.setCellValueFactory(new PropertyValueFactory<>("max"));
     }
+
+    /**
+     * Event Listener attached to add Part button changes to add Part scene when called.
+     */
     public void addPart(ActionEvent actionEvent) throws IOException {
         Helper.screenChange("/grice/wguc482pa/addPartView.fxml", actionEvent);
     }
 
-
+    /**
+     * Event Listener attached to add Product button changes to add Part scene when called.
+     */
     public void addProduct(ActionEvent actionEvent) throws IOException {
         Helper.screenChange("/grice/wguc482pa/addProductView.fxml", actionEvent);
     }
 
+
     @FXML
     private Label mainPartModWarning;
+    /**
+     * Event Listener attached to Modify Part button.  Validates item selection and passes selected
+     * item to modifyPartController
+     */
     public void modPart(ActionEvent actionEvent) throws IOException {
         // Check for part selection.  Throw warning label if no selection present
         if(mainPartTbl.getSelectionModel().isEmpty()) {
@@ -82,7 +100,12 @@ public class mainController implements Initializable {
             // Load modPartController
             Helper.screenChange("/grice/wguc482pa/modifyPartView.fxml", actionEvent); }
     }
+
     @FXML private Label mainProductWarning;
+    /**
+     * Event Listener attached to Modify Product button.  Validates item selection and passes selected
+     * item to modifyProductController
+     */
     public void modProduct(ActionEvent actionEvent) throws IOException {
         if (mainProductTbl.getSelectionModel().isEmpty()) {
             Helper.setWarningLabel(mainProductWarning, "Select item from Part list before proceeding");
@@ -100,6 +123,10 @@ public class mainController implements Initializable {
     @FXML
     private Label mainPartSearchStatusLabel; // Display parts search result status
 
+    /**
+     * Key listener attached to Part Search box.  Dynamically displays a filtered in Parts table view based on user entry
+     * currently in search box.
+     */
     @FXML
     public void mainPartsSearchKeyStroke() {
         FilteredList<Part> namePartFilter = new FilteredList<>(Inventory.getAllParts(), p -> true); // list for name filtering
@@ -140,7 +167,10 @@ public class mainController implements Initializable {
     private TextField mainProductSearch; // Text entry field to capture Products searches
     @FXML
     private Label mainProductSearchStatusLabel; // Display Products search result status
-
+    /**
+     * Key listener attached to Product Search box.  Dynamically displays a filtered in Parts table view based on user entry
+     * currently in search box.
+     */
     @FXML
     public void mainProductSearchKeystroke(){
         FilteredList<Product> nameProductFilter = new FilteredList<>(Inventory.getAllProducts(), p -> true); //obslist for name filtering
@@ -177,10 +207,16 @@ public class mainController implements Initializable {
         }
     }
 
+    /**
+     * Close application
+     */
     public void appExit(){
         System.exit(0);
     }
 
+    /**
+     * Confirm and delete currently selected part in Parts table view.
+     */
     public void mainPartDel() {
         // Check for part selection.  Throw warning label if no selection present
         if(mainPartTbl.getSelectionModel().isEmpty()) {
@@ -198,6 +234,9 @@ public class mainController implements Initializable {
             }
         }
     }
+    /**
+     * Confirm and delete currently selected product in Parts table view.
+     */
     public void mainProductDel() {
         // Check for part selection.  Throw warning label if no selection present
         if(mainProductTbl.getSelectionModel().isEmpty()) {
@@ -215,7 +254,7 @@ public class mainController implements Initializable {
                     Inventory.deleteProduct(mainProductTbl.getSelectionModel().getSelectedItem());
                 }
             } else {
-                // If associated parts not empty then trow warning label
+                // If associated parts not empty then throw warning label
                 mainProductWarning.setText("Associated parts must be deleted first.");
             }
         }

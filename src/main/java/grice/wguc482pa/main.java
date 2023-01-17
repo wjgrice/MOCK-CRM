@@ -1,13 +1,11 @@
-package grice.wguc482pa;
-
 /**
  *
  * @author William Grice
  */
+package grice.wguc482pa;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -29,7 +27,6 @@ public class main extends Application{
      * The start method uses FXML to create the initial/main stage of the application.
      *
      * @param stage Initial program stage
-     * @throws Exception
      */
     @Override
     public void start(Stage stage) throws IOException {
@@ -49,7 +46,6 @@ public class main extends Application{
      * essential and easy step of actuall adding the newly created parts to the inventory data model. The silent
      * failure was corrected by adding Inventory.addPart(XXXX) after the creation of each new test item.
      *
-     * @param args
      */
     public static void main(String[] args) {
         // Pre-populate test Part data.

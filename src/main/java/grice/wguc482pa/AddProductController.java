@@ -1,8 +1,8 @@
-package grice.wguc482pa;
 /**
  *
  * @author William Grice
  */
+package grice.wguc482pa;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,14 +15,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for add product screen
+ *
+ */
 public class AddProductController implements Initializable {
-
     // Declare data objects to hold fields
     FieldsDAO nameFields,stockFields,priceFields,minFields,maxFields;
     // Tag field names and labels from addProductscreen.
@@ -71,6 +74,10 @@ public class AddProductController implements Initializable {
     @FXML private Label addProductSearchLabel;
     @FXML private TextField addProductSearch;
 
+    /**
+     * Key Listener attached to the Product search box.  Called each time a character has been typed in the search box.
+     * Filters Products tableview based on user input.
+     */
     @FXML
     public void addProductSearchKeystroke(){
         FilteredList<Part> nameProductFilter = new FilteredList<>(Inventory.getAllParts(), p -> true); //obslist for name filtering
@@ -110,30 +117,48 @@ public class AddProductController implements Initializable {
     // Create bill of material List to contain associated parts selected by user.
     ObservableList<Part> bom = FXCollections.observableArrayList();
 
+    /**
+     * Key Listener attached to Add button on product creation screen.  Validates entry and passes selection to parts
+     * table view.
+     */
     public void addPartBtn(){
         // Check for part selection.  Throw warning label if no selection present
         if(addProductPartTbl.getSelectionModel().isEmpty()) {
             Helper.setWarningLabel(addProductRmvWarning, "Select item from Part list before proceeding");
         } else {
-            // Pass selected part to mod screen by setting static member in modPartController
+            // Load selected part to associated parts table.
             bom.add(addProductPartTbl.getSelectionModel().getSelectedItem());
             addProductAssociatedPartsTbl.setItems(bom);
         }
     }
 
+    /**
+     * Key Listener attached to Remove part button on product creation screen.  Validates selection and removes part
+     */
     public void addProductRemovePart() {
         if(addProductAssociatedPartsTbl.getSelectionModel().isEmpty()) {
             Helper.setWarningLabel(addProductAddPartWarning, "Select item from Part list before proceeding");
         } else {
-            // Pass selected part to mod screen by setting static member in modPartController
-            bom.remove(addProductPartTbl.getSelectionModel().getSelectedItem());
-            addProductAssociatedPartsTbl.setItems(bom);
+            // Setup and display dialog box to confirm action
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Delete");
+            alert.setHeaderText("Confirm");
+            alert.setContentText("Delete selected Product?");
+            Optional<ButtonType> res = alert.showAndWait();
+            if(res.get() == ButtonType.OK) {
+                // Remove selected part from associated parts list.
+                bom.remove(addProductPartTbl.getSelectionModel().getSelectedItem());
+                addProductAssociatedPartsTbl.setItems(bom);
+            }
+
         }
     }
     @FXML private TextField addProductId;
     /**
      * Validates data entry fields and saves new product to inventory.
      *
+     * @param actionEvent Passed from parent method.
+     * @throws IOException From FXMLLoader.
      */
     @FXML
     public boolean addProductSave(ActionEvent actionEvent) throws IOException {
@@ -142,10 +167,10 @@ public class AddProductController implements Initializable {
 
         // Setup variables for easy part creation
         String name = allFields[0].textField.getText();
-        Double price = (Double) Helper.checkDbl(allFields[2]).getValue();
-        Integer stock = (Integer) Helper.checkInt(allFields[1]).getValue();
-        Integer min = (Integer) Helper.checkInt(allFields[3]).getValue();
-        Integer max = (Integer) Helper.checkInt(allFields[4]).getValue();
+        Double price = Helper.checkDbl(allFields[2]).getValue();
+        Integer stock = Helper.checkInt(allFields[1]).getValue();
+        Integer min = Helper.checkInt(allFields[3]).getValue();
+        Integer max = Helper.checkInt(allFields[4]).getValue();
 
         // All fields have any entry of the correct type.  Now check validity of min/max and stock levels.
         if (Helper.noAlerts(allFields)){

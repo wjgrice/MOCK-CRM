@@ -1,5 +1,8 @@
+/**
+ *
+ * @author William Grice
+ */
 package grice.wguc482pa;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,13 +14,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-
+/**
+ * Controls modify part scene.
+ */
 public class ModifyPartController implements Initializable {
     public static Part selectedPart;
 
@@ -40,7 +44,7 @@ public class ModifyPartController implements Initializable {
 
     /**
      * Init process which always runs first when the controller is called.  In this instance it's used to
-     * load fields with part data passed from main screen.  Addtionally it's sets up the innitial state for
+     * load fields with part data passed from main screen.  Additionally, it's sets up the initial state for
      * the radio buttons.
      *
      */
@@ -94,10 +98,10 @@ public class ModifyPartController implements Initializable {
         // Setup variables for easy part creation
         int id = selectedPart.getId();
         String name = allFields[0].textField.getText();
-        Double price = (Double) Helper.checkDbl(allFields[2]).getValue();
-        Integer stock = (Integer) Helper.checkInt(allFields[1]).getValue();
-        Integer min = (Integer) Helper.checkInt(allFields[3]).getValue();
-        Integer max = (Integer) Helper.checkInt(allFields[4]).getValue();
+        Double price = Helper.checkDbl(allFields[2]).getValue();
+        Integer stock = Helper.checkInt(allFields[1]).getValue();
+        Integer min = Helper.checkInt(allFields[3]).getValue();
+        Integer max = Helper.checkInt(allFields[4]).getValue();
 
         // All fields have any entry of the correct type.  Now check validity of min/max and stock levels.
         if (Helper.noAlerts(allFields, modPartInHouse)){
@@ -114,7 +118,7 @@ public class ModifyPartController implements Initializable {
         if (Helper.noAlerts(allFields, modPartInHouse)) {
             // Check if InHouse or Outsourced use int or string as required for source field.
             if (modPartInHouse.selectedProperty().getValue()) {
-                Integer source = (Integer) Helper.checkInt(allFields[5]).getValue();
+                Integer source = Helper.checkInt(allFields[5]).getValue();
                 // Added a fail check for error logging could be a good future feature implementation
                 if(Inventory.deletePart(selectedPart)) {
                     Inventory.addPart(new InHouse(id, name, price, stock, min, max, source));

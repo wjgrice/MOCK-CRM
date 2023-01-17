@@ -1,5 +1,8 @@
+/**
+ *
+ * @author William Grice
+ */
 package grice.wguc482pa;
-
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +20,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 
-
+/**
+ * Modify Product controller
+ */
 public class ModifyProductController implements Initializable {
     // Declare data objects to hold fields
     FieldsDAO nameFields,stockFields,priceFields,minFields,maxFields;
@@ -40,6 +45,9 @@ public class ModifyProductController implements Initializable {
     // Recieve passed in list of parts from inventory
     public static Product incomingProd;
 
+    /** Init method used to set up scene with incoming data and display parts and associated parts tabelviews.
+     *
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Init container objects which will hold labels and text fields.
@@ -72,8 +80,6 @@ public class ModifyProductController implements Initializable {
     /**
      * Returns application to main view by loading mainController.
      *
-     * @param actionEvent Passed from parent method.
-     * @throws IOException From FXMLLoader.
      */
     public void toMain(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/grice/wguc482pa/mainView.fxml")));
@@ -85,6 +91,10 @@ public class ModifyProductController implements Initializable {
 
     @FXML private TextField modProductSearch;
     @FXML private Label modProductSearchLabel;
+    /**
+     * Key listener attached to prod Search box.  Dynamically displays a filtered in product table view based on user entry
+     * currently in search box.
+     */
     @FXML
     public void modProdSearchKeystroke(){
         FilteredList<Part> nameProductFilter = new FilteredList<>(Inventory.getAllParts(), p -> true); //obslist for name filtering
@@ -127,16 +137,23 @@ public class ModifyProductController implements Initializable {
 
     @FXML private Label modProdAddPartWarn, modProdRmvWarn;
 
+    /**
+     * Key Listener attached to add button.  Validates user entry and add parts from assocated parts table to
+     * inventory object for selected product
+     */
     public void modProdAddBtn() {
         // Check for part selection.  Throw warning label if no selection present
         if(modProdPartTbl.getSelectionModel().isEmpty()) {
             Helper.setWarningLabel(modProdAddPartWarn, "Select item from Part list before proceeding");
         } else {
-            // Pass selected part to mod screen by setting static member in modPartController
             incomingProd.addAssociatedPart(modProdPartTbl.getSelectionModel().getSelectedItem());
             modProdAscTbl.setItems(incomingProd.getAllAssociatedParts());
         }
     }
+
+    /**
+     * Key listener attached to Remove button.  Validates user entry and updates associated products table.
+     */
     public void modProdRmvBtn() {
         if(modProdAscTbl.getSelectionModel().isEmpty()) {
             Helper.setWarningLabel(modProdRmvWarn, "Select item from Part list before proceeding");
@@ -157,16 +174,22 @@ public class ModifyProductController implements Initializable {
         }
     }
 
+    /**
+     * Key listener attached to Save button validates user entry. Sets up DAO object for asscociated fields/labels, and
+     * Checks fields for input validity.  If all checks pass adds product to inventory and returns to main.
+     *
+     * @return boolean
+     */
     public boolean modProdSaveBtn(ActionEvent actionEvent) throws IOException {
         // Load label containers into list
         FieldsDAO[] allFields = {nameFields, stockFields, priceFields, minFields, maxFields};
 
         // Setup variables for easy part creation
         String name = allFields[0].textField.getText();
-        Double price = (Double) Helper.checkDbl(allFields[2]).getValue();
-        Integer stock = (Integer) Helper.checkInt(allFields[1]).getValue();
-        Integer min = (Integer) Helper.checkInt(allFields[3]).getValue();
-        Integer max = (Integer) Helper.checkInt(allFields[4]).getValue();
+        Double price = Helper.checkDbl(allFields[2]).getValue();
+        Integer stock = Helper.checkInt(allFields[1]).getValue();
+        Integer min = Helper.checkInt(allFields[3]).getValue();
+        Integer max = Helper.checkInt(allFields[4]).getValue();
 
         // All fields have any entry of the correct type.  Now check validity of min/max and stock levels.
         if (Helper.noAlerts(allFields)){
@@ -193,6 +216,5 @@ public class ModifyProductController implements Initializable {
         }
         return true;
     }
-//End of Class
 }
 
