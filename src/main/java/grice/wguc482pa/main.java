@@ -38,6 +38,7 @@ public class main extends Application{
     }
 
     /**
+    /**
      * The main method is the kickoff point of the application.  It populates test data starts the program.
      *
      * RUNTIME ERROR - During development I reached a point where my main screen would load and test data instances
@@ -47,6 +48,7 @@ public class main extends Application{
      * failure was corrected by adding Inventory.addPart(XXXX) after the creation of each new test item.
      *
      */
+    //JavaDoc folder located at root of folder tree for project submission /wgu-c482-pa/src/JavaDoc
     public static void main(String[] args) {
         // Pre-populate test Part data.
         InHouse nut = new InHouse(Inventory.getCounter(),"Regular Nut",1.95, 69, 50, 5000, 47 );

@@ -126,6 +126,7 @@ public class AddPartController implements Initializable {
     @FXML
     private void sourceSwitch(){
         if(addPartInHouse.selectedProperty().getValue()){
+            System.out.print("HERE");
             addPartSourceLbl.setText("Machine ID");
         } else {
             addPartSourceLbl.setText("Company Name");

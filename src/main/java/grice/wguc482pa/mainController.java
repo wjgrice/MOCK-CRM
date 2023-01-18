@@ -15,6 +15,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Main controller which controls logic for the main scene.
+ */
 public class mainController implements Initializable {
     @FXML
     private TableView<Part> mainPartTbl;
